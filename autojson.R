@@ -1,6 +1,6 @@
-#this script automatically creates a JSON schema file from a given data file
+#automatically creates a JSON schema file from a given data file
 #run it like:
-#Rscript autojson.R <path_of_data_table> <name_of_output_JSON_file>
+#Rscript autojson.R <path_of_data_file> <path_of_output_JSON_file>
 
 #!/usr/bin/env Rscript
 library(glue)
