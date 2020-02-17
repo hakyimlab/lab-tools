@@ -1,0 +1,17 @@
+aliases:
+  - &breast_cancer_diagnoses_ICD10 |
+      (
+        eid in (
+          select eid from events where field_id in (values(41270), (41202), (41204)) and
+          event in (values('C50 C50.0'), ('C50 C50.1', ('C50 C50.2'), ('C50 C50.3'), ('C50 C50.4'), ('C50 C50.5'),
+          ('C50 C50.6'), ('C50 C50.7'), ('C50 C50.8'), ('C50 C50.9'))
+        )
+      )
+  - &breast_cancer_diagnoses_ICD10_controls |
+      (
+        eid not in (
+          select eid from events where field_id in (values(41270), (41202), (41204)) and
+          event in (values('C50 C50.0'), ('C50 C50.1', ('C50 C50.2'), ('C50 C50.3'), ('C50 C50.4'), ('C50 C50.5'),
+          ('C50 C50.6'), ('C50 C50.7'), ('C50 C50.8'), ('C50 C50.9'))
+        )
+      )
