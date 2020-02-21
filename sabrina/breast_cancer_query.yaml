@@ -1,17 +1,59 @@
+
 aliases:
-  - &breast_cancer_diagnoses_ICD10 |
+  - &breast_cancer_diagnoses |
       (
         eid in (
           select eid from events where field_id in (values(41270), (41202), (41204)) and
-          event in (values('C50 C50.0'), ('C50 C50.1', ('C50 C50.2'), ('C50 C50.3'), ('C50 C50.4'), ('C50 C50.5'),
-          ('C50 C50.6'), ('C50 C50.7'), ('C50 C50.8'), ('C50 C50.9'))
+          event in (values('C500'), ('C501', ('C502'), ('C503'), ('C504'), ('C505'),
+          ('C506'), ('C507'), ('C508'), ('C509'))
+          union
+          select eid from events where field_id = 40011 and
+          event in (values('8502'), ('8514'), ('8520'), ('8521'), ('8522'), ('8523'), ('8540'), ('8541'), ('9020'))
+          union
+          select eid from events where field_id in (values(40013), (41271), (41203), (41205)) and
+          event in (values('1740'), ('1741'), ('1742'), ('1743'), ('1744'), ('1745'),
+          ('1746'), ('1747'), ('1748'), ('1749'))
         )
       )
-  - &breast_cancer_diagnoses_ICD10_controls |
+  - &breast_cancer_diagnoses_controls |
       (
         eid not in (
           select eid from events where field_id in (values(41270), (41202), (41204)) and
-          event in (values('C50 C50.0'), ('C50 C50.1', ('C50 C50.2'), ('C50 C50.3'), ('C50 C50.4'), ('C50 C50.5'),
-          ('C50 C50.6'), ('C50 C50.7'), ('C50 C50.8'), ('C50 C50.9'))
+          event in (values('C500'), ('C501', ('C502'), ('C503'), ('C504'), ('C505'),
+          ('C506'), ('C507'), ('C508'), ('C509'))
+        )
+        and eid not in (
+          select eid from events where field_id = 40011 and
+          event in (values('8502'), ('8514'), ('8520'), ('8521'), ('8522'), ('8523'), ('8540'), ('8541'), ('9020'))
+        )
+        and eid not in (
+          select eid from events where field_id in (values(40013), (41271), (41203), (41205)) and
+          event in (values('1740'), ('1741'), ('1742'), ('1743'), ('1744'), ('1745'),
+          ('1746'), ('1747'), ('1748'), ('1749'))
         )
       )
+
+  - &breast_cancer_self_reported |
+      (
+        eid in (
+          select eid from events where field_id = 20001 and
+          (values('8502'), ('8514'), ('8520'), ('8521'), ('8522'), ('8523'), ('8540'), ('8541'), ('9020'))
+        )
+      )
+  - &breast_cancer_self_reported_controls |
+      (
+        eid not in (
+          select eid from events where field_id = 20001 and
+          (values('8502'), ('8514'), ('8520'), ('8521'), ('8522'), ('8523'), ('8540'), ('8541'), ('9020'))
+        )
+      )
+
+data:
+  breast_cancer_diagnoses:
+    sql:
+      1: *breast_cancer_diagnoses
+      0: *breast_cancer_diagnoses_controls
+  breast_cancer_self_reported:
+    sql:
+      1: *breast_cancer_self_reported
+      0: *breast_cancer_self_reported_controls
