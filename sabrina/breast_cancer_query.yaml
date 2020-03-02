@@ -1,10 +1,21 @@
+samples_filters:
+  - cin_white_british_ancestry_subset_0_0 = 1
+  - eid not in (select eid from bad_related_samples_2nd_higher_and_high_missrate)
+  - eid not in (select eid from events where field_id = 31 in (values('0')))
+  - chet_missing_outliers_0_0 = 0
+  - cputative_sex_chromosome_aneuploidy_0_0 = 0
+  - cexcess_relatives_0_0 = 0
+  - eid not in (select eid from withdrawls)
+  - eid > 0
+
+
 
 aliases:
   - &breast_cancer_diagnoses |
       (
         eid in (
           select eid from events where field_id in (values(41270), (41202), (41204)) and
-          event in (values('C500'), ('C501', ('C502'), ('C503'), ('C504'), ('C505'),
+          event in (values('C500'), ('C501'), ('C502'), ('C503'), ('C504'), ('C505'),
           ('C506'), ('C507'), ('C508'), ('C509'))
           union
           select eid from events where field_id = 40011 and
@@ -19,8 +30,7 @@ aliases:
       (
         eid not in (
           select eid from events where field_id in (values(41270), (41202), (41204)) and
-          event in (values('C500'), ('C501', ('C502'), ('C503'), ('C504'), ('C505'),
-          ('C506'), ('C507'), ('C508'), ('C509'))
+          event in (values('C500'), ('C501'), ('C502'), ('C503'), ('C504'), ('C505'), ('C506'), ('C507'), ('C508'), ('C509'))
         )
         and eid not in (
           select eid from events where field_id = 40011 and
@@ -28,8 +38,7 @@ aliases:
         )
         and eid not in (
           select eid from events where field_id in (values(40013), (41271), (41203), (41205)) and
-          event in (values('1740'), ('1741'), ('1742'), ('1743'), ('1744'), ('1745'),
-          ('1746'), ('1747'), ('1748'), ('1749'))
+          event in (values('1740'), ('1741'), ('1742'), ('1743'), ('1744'), ('1745'), ('1746'), ('1747'), ('1748'), ('1749'))
         )
       )
 
@@ -47,6 +56,7 @@ aliases:
           (values('8502'), ('8514'), ('8520'), ('8521'), ('8522'), ('8523'), ('8540'), ('8541'), ('9020'))
         )
       )
+
 
 data:
   breast_cancer_diagnoses:
