@@ -43,15 +43,13 @@ aliases:
   - &breast_cancer_self_reported |
       (
         eid in (
-          select eid from events where field_id = 20001 and
-          event in (values('8502'), ('8514'), ('8520'), ('8521'), ('8522'), ('8523'), ('8540'), ('8541'), ('9020'))
+          select eid from events where field_id = 20001 and event in (values('1002'))
         )
       )
   - &breast_cancer_self_reported_controls |
       (
         eid not in (
-          select eid from events where field_id = 20001 and
-          event in (values('8502'), ('8514'), ('8520'), ('8521'), ('8522'), ('8523'), ('8540'), ('8541'), ('9020'))
+          select eid from events where field_id = 20001 and event in ((values('1002'))
         )
       )
 
