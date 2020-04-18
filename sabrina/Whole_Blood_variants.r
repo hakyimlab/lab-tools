@@ -38,6 +38,7 @@ dbWriteTable(output, "extra", updated_extra)
 # Update GTEx variant in mashr_Whole_Blood (RSID1 and RSID2) to UKBiobank definition
 mapped_Whole_Blood <- inner_join(mashr_Whole_Blood, merged, by=c("RSID1" = "varID")) %>% mutate(RSID1 = variant) %>% select(-variant)
 mapped_Whole_Blood <- inner_join(mapped_Whole_Blood, merged, by=c("RSID2" = "varID")) %>% mutate(RSID2 = variant) %>% select(-variant)
+mapped_Whole_Blood <- mapped_Whole_Blood %>% select(GENE, variant.x, variant.y, VALUE) %>% rename(RSID1 = variant.x, RSID2 = variant.y) 
 write.table(mapped_Whole_Blood, file="mapped_Whole_Blood.txt")
 dbDisconnect(db)
 dbDisconnect(output)
