@@ -1,1 +1,3 @@
-Elastic-net weights were drawn from Gandal et al.’s study on transcriptomic organization in brains with autism spectrum disorder, schizophrenia, and bipolar disorder. They performed TWAS based on postmortem frontal and temporal cerebral cortex samples from 1695 adults. LD was calculated using 1000 Genomes European reference panel.
+Elastic-net weights were drawn from Gandal et al.’s study on transcriptomic organization in brains with autism spectrum disorder, schizophrenia, and bipolar disorder. 
+They performed TWAS based on postmortem frontal and temporal cerebral cortex samples from 1695 adults. 
+LD was calculated using 1000 Genomes European reference panel.
